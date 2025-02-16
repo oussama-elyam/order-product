@@ -84,7 +84,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<?> updateProduct(@Valid @RequestBody ProductDtoRequest body, @PathVariable("id") Long id) {
+    public ResponseEntity<?> updateProduct(@RequestBody ProductDtoRequest body, @PathVariable("id") Long id) {
         try {
 
             Product existingProduct = modelMapper.map(body, Product.class);

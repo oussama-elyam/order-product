@@ -29,13 +29,16 @@ public class ProductServiceImp implements ProductService {
             throw new ProductNameAlreadyExistsException("Product name must be unique. The name '" + body.getName() + "' already exists.");
         }
 
-        // Set the status to 'AVAILABLE' if the body.status is null
-        if (body.getStatusProduct() == null && body.getQte() > 0) {
-            body.setStatusProduct(StatusProduct.AVAILABLE);
-        } else {
-            body.setStatusProduct(StatusProduct.NOTAVAILABLE);
-        }
-        return productRepository.save(body);
+        Product newProduct = Product.builder()
+                .name(body.getName())
+                .price(body.getPrice())
+                .qte(body.getQte())
+                .statusProduct((body.getStatusProduct() == null && body.getQte() > 0)
+                        ? StatusProduct.AVAILABLE
+                        : StatusProduct.NOTAVAILABLE)
+                .build();
+
+        return productRepository.save(newProduct);
     }
     @Override
     public Page<Product> getProducts(int page, int size) {
@@ -50,11 +53,11 @@ public class ProductServiceImp implements ProductService {
         if (existingProduct == null) {
             return null;
         }
+        body.setStatusProduct(body.getQte() > 0 ? StatusProduct.AVAILABLE : StatusProduct.NOTAVAILABLE);
+        modelMapper.map(body, existingProduct);
 
-        modelMapper.map(body, existingProduct); // This will automatically set all fields
         return productRepository.save(existingProduct);
     }
-
 
     @Override
     public void deleteProduct(Long id) {
