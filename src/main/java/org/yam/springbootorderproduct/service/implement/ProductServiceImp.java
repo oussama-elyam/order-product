@@ -29,6 +29,8 @@ public class ProductServiceImp implements ProductService {
             throw new ProductNameAlreadyExistsException("Product name must be unique. The name '" + body.getName() + "' already exists.");
         }
 
+
+        //we can use moddel mapper and not using builder because the object is not that complexe to build
         Product newProduct = Product.builder()
                 .name(body.getName())
                 .price(body.getPrice())

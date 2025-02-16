@@ -18,7 +18,7 @@ The project aims to demonstrate:
 - **Pagination and sorting**
 - **Dependency Injection:** Use of constructor-based injection for cleaner and testable code.  
 - **Eror Handling:** Proper exception management with custom error responses.  
-- **Design Patterns:** Implementation of patterns such as **Builder Pattern**.  
+- **Design Patterns:** Implementation of patterns such as **Builder Pattern** (in this project create some object like product with builder even the use case doesnt need builder pattern).  
 - **Spring Boot Annotations:** Effective use of annotations such as `@Transactional`, `@Valid`, and more.  
 - **Java +8 Modern Features:** Use of streams, lambda expressions, and method references.  
 - **Cycle Prevention**  
