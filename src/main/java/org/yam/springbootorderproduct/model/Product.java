@@ -18,7 +18,7 @@ public class Product {
     private Long id;
     private String name;
     private String price;
-    private String qte;
+    private Long qte;
     private Enum<StatusProduct> statusProduct;
     //1to* OrderItem liste
 

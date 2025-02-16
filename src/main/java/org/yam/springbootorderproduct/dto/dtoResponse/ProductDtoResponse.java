@@ -1,12 +1,13 @@
-package org.yam.springbootorderproduct.dtoRequest;
+package org.yam.springbootorderproduct.dto.dtoResponse;
 
 import lombok.Data;
 import org.yam.springbootorderproduct.model.StatusProduct;
 
 @Data
-public class ProductDtoRequest {
+public class ProductDtoResponse {
+    private Long id;
     private String name;
-    private String price;
-    private String qte;
+    private double price;
     private Enum<StatusProduct> statusProduct;
+
 }
