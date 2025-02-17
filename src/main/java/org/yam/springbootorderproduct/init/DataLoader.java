@@ -1,4 +1,4 @@
-package org.yam.springbootorderproduct.utils;
+package org.yam.springbootorderproduct.init;
 
 
 import lombok.RequiredArgsConstructor;

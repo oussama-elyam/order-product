@@ -1,4 +1,4 @@
-package org.yam.springbootorderproduct.utils;
+package org.yam.springbootorderproduct.configuration;
 
 
 import org.modelmapper.ModelMapper;

@@ -1,4 +1,4 @@
-package org.yam.springbootorderproduct.service.implement;
+package org.yam.springbootorderproduct.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImp implements ProductService {
+public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;

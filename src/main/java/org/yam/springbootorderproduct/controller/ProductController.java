@@ -67,7 +67,7 @@ public class ProductController {
 
         Page<Product> Products = productService.getProducts(page, size);
 
-        return new ResponseEntity<>(Products.getContent(), HttpStatus.OK);
+        return ResponseEntity.ok(Products.getContent());
     }
 
     @DeleteMapping("/{id}")
