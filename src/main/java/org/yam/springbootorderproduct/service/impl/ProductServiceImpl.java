@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.yam.springbootorderproduct.controller.ProductController;
 import org.yam.springbootorderproduct.exception.ResourceConflictException;
 import org.yam.springbootorderproduct.model.Product;
 import org.yam.springbootorderproduct.model.StatusProduct;
@@ -25,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
-    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Transactional
     @Override

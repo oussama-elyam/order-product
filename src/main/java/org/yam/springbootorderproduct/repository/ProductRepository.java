@@ -6,7 +6,6 @@ import org.yam.springbootorderproduct.model.Order;
 import org.yam.springbootorderproduct.model.Product;
 
 @Repository
-
 public interface ProductRepository extends JpaRepository<Product, Long> {
     boolean existsByName(String name);
 }

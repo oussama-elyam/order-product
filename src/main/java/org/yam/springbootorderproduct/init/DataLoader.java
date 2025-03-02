@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.yam.springbootorderproduct.model.ActorRole;
-import org.yam.springbootorderproduct.model.User;
-import org.yam.springbootorderproduct.repository.UserRepository;
+import org.yam.springbootorderproduct.model.Actor;
+import org.yam.springbootorderproduct.repository.ActorRepository;
 
 import java.util.List;
 
@@ -13,18 +13,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DataLoader implements CommandLineRunner {
 
-    private final UserRepository userRepository;
+    private final ActorRepository actorRepository;
 
     @Override
     public void run(String... args) throws Exception {
-//        // Creating predefined users with roles
-//        User customer = new User(1L,"customer@mail.com", "password", ActorRole.CUSTOMER);
-//        User responsabileStock = new User(2L,"responsable@mail.com", "password", ActorRole.RESPONSABLE_STOCK);
-//        User admin = new User(3L,"admin@mail.com", "password", ActorRole.ADMIN);
-//
-//        // Saving users to the database
-//        userRepository.saveAll(List.of(customer, responsabileStock, admin));
+        // Creating predefined actors with roles
+        Actor customer = new Actor(null,"customer@mail.com", "password", ActorRole.CUSTOMER);
+        Actor responsabileStock = new Actor(null,"responsable@mail.com", "password", ActorRole.RESPONSABLE_STOCK);
+        Actor admin = new Actor(null,"admin@mail.com", "password", ActorRole.ADMIN);
 
-        System.out.println("Predefined users added!");
+        // Saving actors to the database
+        actorRepository.saveAll(List.of(customer, responsabileStock, admin));
+
+        System.out.println("Predefined actors added!");
     }
 }
