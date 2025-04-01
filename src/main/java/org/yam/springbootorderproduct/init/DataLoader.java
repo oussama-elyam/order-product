@@ -17,14 +17,12 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Creating predefined actors with roles
+
         Actor customer = new Actor(null,"customer@mail.com", "password", ActorRole.CUSTOMER);
         Actor responsabileStock = new Actor(null,"responsable@mail.com", "password", ActorRole.RESPONSABLE_STOCK);
         Actor admin = new Actor(null,"admin@mail.com", "password", ActorRole.ADMIN);
 
-        // Saving actors to the database
         actorRepository.saveAll(List.of(customer, responsabileStock, admin));
-
         System.out.println("Predefined actors added!");
     }
 }

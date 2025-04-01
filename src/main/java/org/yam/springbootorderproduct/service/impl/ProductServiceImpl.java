@@ -3,14 +3,16 @@ package org.yam.springbootorderproduct.service.impl;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.yam.springbootorderproduct.dto.dtoRequest.ProductDtoRequest;
+import org.yam.springbootorderproduct.dto.dtoResponse.ProductDtoResponse;
 import org.yam.springbootorderproduct.exception.ResourceConflictException;
+import org.yam.springbootorderproduct.mapper.ProductMapper;
 import org.yam.springbootorderproduct.model.Product;
 import org.yam.springbootorderproduct.model.StatusProduct;
 import org.yam.springbootorderproduct.repository.ProductRepository;
@@ -23,12 +25,15 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final ModelMapper modelMapper;
+    private final ProductMapper productMapper;
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Transactional
     @Override
-    public Product createProduct(Product body) {
+    public ProductDtoResponse createProduct(ProductDtoRequest bodyRequest) {
+        Product body = productMapper.toEntity(bodyRequest);
+
+
         if (productRepository.existsByName(body.getName())) {
             throw new ResourceConflictException("Product name must be unique. The name '" + body.getName() + "' already exists.");
         }
@@ -42,18 +47,21 @@ public class ProductServiceImpl implements ProductService {
                         : StatusProduct.NOTAVAILABLE)
                 .build();
 
-        return productRepository.save(newProduct);
+        return productMapper.toResponseDto(productRepository.save(newProduct));
     }
 
     @Override
-    public Page<Product> getProducts(int page, int size) {
+    public Page<ProductDtoResponse> getProducts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return productRepository.findAll(pageable);
+        Page<Product> productPage = productRepository.findAll(pageable);
+        return productPage.map(productMapper::toResponseDto);
     }
 
     @Override
     @Transactional
-    public Product updateProduct(Product body, Long id) {
+    public ProductDtoResponse updateProduct(ProductDtoRequest bodyRequest, Long id) {
+        Product body = productMapper.toEntity(bodyRequest);
+        body.setId(id); // Ensure the id remains unchanged
 
         Product existingProduct = productRepository.findById(id).orElse(null);
         if (existingProduct == null) {
@@ -62,9 +70,13 @@ public class ProductServiceImpl implements ProductService {
         }
 
         body.setStatusProduct(body.getQte() > 0 ? StatusProduct.AVAILABLE : StatusProduct.NOTAVAILABLE);
-        modelMapper.map(body, existingProduct);
 
-        return productRepository.save(existingProduct);
+        existingProduct.setName(body.getName());
+        existingProduct.setPrice(body.getPrice());
+        existingProduct.setQte(body.getQte());
+        existingProduct.setStatusProduct(body.getStatusProduct());
+
+        return productMapper.toResponseDto(productRepository.save(body));
     }
 
     @Override
