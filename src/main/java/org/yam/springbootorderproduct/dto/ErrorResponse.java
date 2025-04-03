@@ -1,4 +1,4 @@
-package org.yam.springbootorderproduct.dto.dtoResponse;
+package org.yam.springbootorderproduct.dto;
 
 import lombok.Data;
 

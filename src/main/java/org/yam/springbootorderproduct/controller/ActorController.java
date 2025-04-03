@@ -7,8 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.yam.springbootorderproduct.dto.dtoRequest.ActorDtoRequest;
-import org.yam.springbootorderproduct.dto.dtoResponse.ActorDtoResponse;
+import org.yam.springbootorderproduct.dto.ActorDto;
 import org.yam.springbootorderproduct.model.Actor;
 import org.yam.springbootorderproduct.service.ActorService;
 
@@ -23,11 +22,11 @@ public class ActorController {
     private final ModelMapper modelMapper;
 
     @PostMapping
-    public ResponseEntity<ActorDtoResponse> createActor(@Valid @RequestBody ActorDtoRequest body) {
+    public ResponseEntity<ActorDto> createActor(@Valid @RequestBody ActorDto body) {
 
         Actor newActor = modelMapper.map(body, Actor.class);
         Actor savedActor = actorService.createActor(newActor);
-        ActorDtoResponse response = modelMapper.map(savedActor, ActorDtoResponse.class);
+        ActorDto response = modelMapper.map(savedActor, ActorDto.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -47,7 +46,7 @@ public class ActorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateActor(@RequestBody ActorDtoRequest body, @PathVariable("id") Long id) {
+    public ResponseEntity<?> updateActor(@RequestBody ActorDto body, @PathVariable("id") Long id) {
 
         Actor existingActor = modelMapper.map(body, Actor.class);
         existingActor.setId(id); // Ensure the id remains unchanged

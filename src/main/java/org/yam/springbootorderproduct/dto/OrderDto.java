@@ -1,9 +1,9 @@
-package org.yam.springbootorderproduct.dto.dtoRequest;
+package org.yam.springbootorderproduct.dto;
 
 import lombok.Data;
 
 @Data
-public class OrderDtoRequest {
+public class OrderDto {
 
     private String priceTotal;
     private String qteTotal;

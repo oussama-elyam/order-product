@@ -1,10 +1,10 @@
-package org.yam.springbootorderproduct.dto.dtoRequest;
+package org.yam.springbootorderproduct.dto;
 
 import lombok.Data;
 import org.yam.springbootorderproduct.model.ActorRole;
 
 @Data
-public class ActorDtoRequest {
+public class ActorDto {
     private String mail;
     private String password;
     private Enum<ActorRole> actorRole;

@@ -9,8 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.yam.springbootorderproduct.dto.dtoRequest.ProductDtoRequest;
-import org.yam.springbootorderproduct.dto.dtoResponse.ProductDtoResponse;
+import org.yam.springbootorderproduct.dto.ProductDto;
 import org.yam.springbootorderproduct.exception.ResourceConflictException;
 import org.yam.springbootorderproduct.mapper.ProductMapper;
 import org.yam.springbootorderproduct.model.Product;
@@ -30,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Transactional
     @Override
-    public ProductDtoResponse createProduct(ProductDtoRequest bodyRequest) {
+    public ProductDto createProduct(ProductDto bodyRequest) {
         Product body = productMapper.toEntity(bodyRequest);
 
 
@@ -51,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductDtoResponse> getProducts(int page, int size) {
+    public Page<ProductDto> getProducts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Product> productPage = productRepository.findAll(pageable);
         return productPage.map(productMapper::toResponseDto);
@@ -59,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductDtoResponse updateProduct(ProductDtoRequest bodyRequest, Long id) {
+    public ProductDto updateProduct(ProductDto bodyRequest, Long id) {
         Product body = productMapper.toEntity(bodyRequest);
         body.setId(id); // Ensure the id remains unchanged
 
