@@ -18,11 +18,11 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Actor customer = new Actor(null,"customer@mail.com", "password", ActorRole.CUSTOMER);
-        Actor responsabileStock = new Actor(null,"responsable@mail.com", "password", ActorRole.RESPONSABLE_STOCK);
-        Actor admin = new Actor(null,"admin@mail.com", "password", ActorRole.ADMIN);
-
-        actorRepository.saveAll(List.of(customer, responsabileStock, admin));
-        System.out.println("Predefined actors added!");
+//        Actor customer = new Actor(null,"customer@mail.com", "password", ActorRole.CUSTOMER);
+//        Actor responsabileStock = new Actor(null,"responsable@mail.com", "password", ActorRole.RESPONSABLE_STOCK);
+//        Actor admin = new Actor(null,"admin@mail.com", "password", ActorRole.ADMIN);
+//
+//        actorRepository.saveAll(List.of(customer, responsabileStock, admin));
+//        System.out.println("Predefined actors added!");
     }
 }
